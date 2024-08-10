@@ -13,7 +13,7 @@ const Weather = ({apiSearch}) => {
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(null)
 
-  const url = dataCuaca(apiSearch)
+  const url = dataCuaca(`weather?q=${apiSearch}`)
 
 
   //fetch API
@@ -39,8 +39,15 @@ const Weather = ({apiSearch}) => {
 
   const weatherForecast = data.id
 
-  const farenheit = data.main?.temp.toFixed()
-  const celcius = Math.round(5/9 * (farenheit - 32))
+
+  const farenheit = [data.main?.temp.toFixed(), data.main?.feels_like.toFixed(), data.main?.temp_max.toFixed(), data.main?.temp_min.toFixed()]
+
+  const MainTemp = Math.round(5/9 * (farenheit[0] - 32))
+  const FeelsLike = Math.round(5/9 * (farenheit[1] - 32))
+  const HighTemp = Math.round(5/9 * (farenheit[2] - 32))
+  const LowTemp = Math.round(5/9 * (farenheit[3] - 32))
+
+
 
 
   //Change weather logo
@@ -52,12 +59,16 @@ const Weather = ({apiSearch}) => {
         logo = cloudy
       }else if(items.main === 'Clear'){
         logo = sun
-      }else if(items.main === 'Thunderstorm' || 'Thunder'){
+      }else if(items.main === 'Thunderstorm'){
         logo = thunder
+      }else if(items.main === 'Haze'){
+        logo = foggy
       }
     })}
     return logo  
   }
+
+  //change Background
 
   return (
     <div>
@@ -83,13 +94,13 @@ const Weather = ({apiSearch}) => {
               <div className="h-60 flex flex-col justify-center w-1/2 mt-8">
                 {data.main ? (
                   <h2 className="Temperature font-bold text-white text-7xl">
-                    {celcius}℃
+                    {MainTemp}℃
                   </h2>
                 ) : null}
                 <div className="flex flex-col justify-center mt-2">
                 {data.main ? (
                   <h2 className="Temperature font-bold text-white">
-                    Feels like {celcius}℃
+                    Feels like {FeelsLike}℃
                   </h2>
                 ) : null}
                   {data.main ? (
@@ -105,12 +116,12 @@ const Weather = ({apiSearch}) => {
                 <div className="flex flex-row mt-2 justify-around border-t-2 border-white items-center">
                   {data.main ? (
                     <h2 className="Temperature font-bold mt-1 text-white">
-                      High {celcius}℃
+                      High {HighTemp}℃
                     </h2>
                   ) : null}
                   {data.main ? (
                     <h2 className="Temperature font-bold mt-1 text-white">
-                      Low {celcius}℃
+                      Low {LowTemp}℃
                     </h2>
                   ) : null}
                 </div>

@@ -19,13 +19,13 @@ const handleChange = (event) => {
         <div className="Container flex flex-row justify-center mt-10">
             <input 
                 placeholder="Search Country"
-                className="SearchBar border border-solid border-black w-96 h-8 p-3 rounded-xl"
+                className="SearchBar border border-solid border-black w-[500px] h-12 text-lg px-5 rounded-3xl"
                 onKeyDown={handleChange}
             />
             <button 
             >
-            < MagnifyingGlass size={18}
-              className="relative top-0 right-6" 
+            < MagnifyingGlass size={20}
+              className="relative top-0 right-8" 
             />
             </button>
         </div>

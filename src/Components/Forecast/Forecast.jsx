@@ -14,7 +14,7 @@ const Apiforecast = ({weatherId}, dailyForecast) => {
     const [error, setError] = useState(true)
     const [loading, setLoading] = useState(null)
 
- const url = forecastApi(weatherId)
+ const url = dataCuaca(`forecast?id=${weatherId}`)
  
 
 
@@ -46,12 +46,13 @@ useEffect(() => {
 
 
 //Mengatur hari
-const Days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',  'Friday', 'Sunday']
+const Days = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const day = new Date()
 
 const scheduleFunc = (value) => {
-    const today = day.getDay() - 1 
-    const indexDay = Days[today + value]
+    const today = day.getDay()
+    const index = today + value
+    const indexDay = index > 6 ? Days[index - 7] : Days[index]
     return indexDay
 }
 let afterTommorow = scheduleFunc(2)
@@ -60,15 +61,30 @@ let specificDate = scheduleFunc(4)
 
 const schedule = ['Today', 'Tommorow', afterTommorow , dayAfterTomorrow, specificDate]
 const mappingSchedule = schedule.map(item => item)
+
+
+//Mengatur tanggal
+const [dates, setDates] = useState([])
+useEffect(() => {
+    const date = []
+
+    let currentDate = new Date()
+    for(let i = 0; i < 6; i++){
+        const formatDate = currentDate.toLocaleDateString('id-ID')
+        date.push(formatDate)
+        currentDate.setDate(currentDate.getDate() + 1)
+    }
+    setDates(date)
+},[])
+
+
+
     return(
         <div className="flex flex-col"> 
             {dataApi && (
-                <div className="bg-sky-200/50 w-[800px] rounded-xl h-72 flex">
-                    <div className="flex flex-col w-full">
-                        <h2>{mappingSchedule}</h2>
-                    <div className="flex flex-row justify-around">
-                    {dailyForecast.map((items) => {        
-                        const weatherIcons = (weather) => {
+                <div className="bg-sky-200/50 w-[800px] rounded-xl h-72 flex flex-row justify-around">
+                            {dailyForecast.map((items, index) => {        
+                            const weatherIcons = (weather) => {
                             const condition = items.weather[0].main
                             if(condition === "Rain"){
                                 weather = rain
@@ -79,23 +95,29 @@ const mappingSchedule = schedule.map(item => item)
                             }
                             return weather
                         }                        
-                        const farenheit = items.main?.temp.toFixed()
-                        const celcius = Math.round(5/9 * (farenheit - 32))
+                        const farenheit = [items.main?.temp.toFixed(), items.main.feels_like.toFixed() ]
+                        const MainTemp = Math.round(5/9 * (farenheit[0] - 32))
+                        const feelsLike = Math.round(5/9 * (farenheit[1] - 32))
                             return(
-                                <div className="flex flex-col"> 
+                                <div className="flex flex-col items-center mt-2"> 
+                                { /**  untuk menampilkan hasil dari mapping sebuah hari */}
+                                <h2 className="text-white font-bold text-lg">{mappingSchedule[index]}</h2>
+                                <h2 className="text-white text-xs">{dates[index]}</h2>
                                 <img 
                                     src={weatherIcons()}
                                     height={50}
                                     width={50}
-                                    
+                                    className="mt-2"
                                     />
-                                <h2 className="text-white mt-2">{celcius}℃</h2>                     
+                                <h2 className="text-white mt-2">{MainTemp}℃</h2>
+                                <div className="mt-20 flex flex-col items-center">
+                                    <h2 className="text-white">{feelsLike}℃</h2>
+                                    <h2 className="mt-2 text-white">{items.wind.speed} m/s</h2>
+                                </div>                    
                             </div>
                         )
                     
                     })}
-                    </div>
-                    </div>
                 </div>
             )}
         </div>
