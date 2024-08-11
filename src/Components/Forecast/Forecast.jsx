@@ -101,7 +101,7 @@ useEffect(() => {
                             return(
                                 <div className="flex flex-col max-sm:flex-row md items-center mt-2"> 
                                 { /**  untuk menampilkan hasil dari mapping sebuah hari */}
-                                <h2 className="text-white font-bold text-lg max-sm:text-[10px]">            {mappingSchedule[index]}</h2>
+                                <h2 className="text-white font-bold text-lg max-sm:text-xs">            {mappingSchedule[index]}</h2>
                                 <h2 className="text-white text-xs max-sm:text-[8px]">{dates[index]}</h2>
                                 <img 
                                     src={weatherIcons()}
