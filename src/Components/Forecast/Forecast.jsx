@@ -80,9 +80,9 @@ useEffect(() => {
 
 
     return(
-        <div className="flex flex-col"> 
+        <div className="flex"> 
             {dataApi && (
-                <div className="bg-sky-200/50 w-[800px] rounded-xl h-72 flex flex-row justify-around">
+                <div className="bg-sky-200/50 w-[800px] rounded-xl h-72 max-sm:h-64 flex flex-row max-sm:flex-col max-sm:overflow-y-auto max-sm:mb-4 max-sm:w-[360px] max-sm:m-auto justify-around">
                             {dailyForecast.map((items, index) => {        
                             const weatherIcons = (weather) => {
                             const condition = items.weather[0].main
@@ -99,20 +99,20 @@ useEffect(() => {
                         const MainTemp = Math.round(5/9 * (farenheit[0] - 32))
                         const feelsLike = Math.round(5/9 * (farenheit[1] - 32))
                             return(
-                                <div className="flex flex-col items-center mt-2"> 
+                                <div className="flex flex-col max-sm:flex-row md items-center mt-2"> 
                                 { /**  untuk menampilkan hasil dari mapping sebuah hari */}
-                                <h2 className="text-white font-bold text-lg">{mappingSchedule[index]}</h2>
-                                <h2 className="text-white text-xs">{dates[index]}</h2>
+                                <h2 className="text-white font-bold text-lg max-sm:text-[10px]">            {mappingSchedule[index]}</h2>
+                                <h2 className="text-white text-xs max-sm:text-[8px]">{dates[index]}</h2>
                                 <img 
                                     src={weatherIcons()}
                                     height={50}
                                     width={50}
-                                    className="mt-2"
+                                    className="mt-2 max-sm:w-10"
                                     />
-                                <h2 className="text-white mt-2">{MainTemp}℃</h2>
-                                <div className="mt-20 flex flex-col items-center">
-                                    <h2 className="text-white">{feelsLike}℃</h2>
-                                    <h2 className="mt-2 text-white">{items.wind.speed} m/s</h2>
+                                <h2 className="text-white mt-2 max-sm:text-xs text-sm">{MainTemp}℃</h2>
+                                <div className="mt-20 flex flex-col max-sm:flex-row items-center">
+                                    <h2 className="text-white max-sm:text-xs text-sm">{feelsLike}℃</h2>
+                                    <h2 className="mt-2 text-white max-sm:text-xs text-sm">{items.wind.speed} m/s</h2>
                                 </div>                    
                             </div>
                         )

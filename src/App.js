@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Weather from "./Components/WeatherPage";
 import Search from "./Components/Search";
-import Maps from "./Components/Maps/Maps";
+import Maps from "./Components/Maps/weatherMaps";
+
 
 const App = () => {  
   const [search, setSearch] = useState('')
@@ -11,9 +12,6 @@ const App = () => {
       <div className="flex flex-col">
       <Search setSearch={setSearch}/>
       <Weather apiSearch={search}/>
-      </div>
-      <div>
-          <Maps />
       </div>
     </div>
   );

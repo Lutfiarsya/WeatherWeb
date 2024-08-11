@@ -19,7 +19,7 @@ const handleChange = (event) => {
         <div className="Container flex flex-row justify-center mt-10">
             <input 
                 placeholder="Search Country"
-                className="SearchBar border border-solid border-black w-[500px] h-12 text-lg px-5 rounded-3xl"
+                className="SearchBar border ml-3 border-solid border-black md:w-[500px] w-80 md:h-12 h-10 text-lg px-5 rounded-3xl"
                 onKeyDown={handleChange}
             />
             <button 
