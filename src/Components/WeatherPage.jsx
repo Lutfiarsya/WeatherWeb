@@ -87,7 +87,7 @@ const Weather = ({apiSearch, darkMode, setDarkmode}) => {
             </h1>
           </div>
           <div className='flex max-sm:flex-col h-56 lg:flex-row md:justify-around my-12'>
-           <div className={`flex md:w-1/3 md:h-72 max-sm:h-60 max-sm:m-auto max-sm:mb-8 max-sm:w-[360px] max-sm:px-2 items-center border rounded-lg ${darkMode ? "bg-zinc-500/50" : 'bg-cyan-800/50'} border-none`}>
+           <div className={`flex md:w-1/3 md:h-72 max-sm:h-60 max-sm:m-auto max-sm:mb-8 max-sm:w-[360px] max-sm:px-2 items-center border rounded-lg transition-all duration-500 ease-in-out transform ${darkMode ? "bg-zinc-500/50" : 'bg-cyan-800/50'} border-none`}>
             <div className="flex flex-row w-96 h-60 items-center justify-evenly m-auto">
               <div className="Icon flex flex-col items-center max-sm:mb-8 w-1/2 max-sm:w-36 max-sm:mt-6 max-sm:h-56 h-56 p-2">
                 <img src={handleLogo()} 
