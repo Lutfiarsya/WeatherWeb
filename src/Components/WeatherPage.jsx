@@ -8,7 +8,7 @@ import thunder from '../Assets/thunder.png'
 import {dataCuaca} from '../libs/apicall'
 import Apiforecast from './Forecast/Forecast';
 
-const Weather = ({apiSearch}) => {
+const Weather = ({apiSearch, darkMode, setDarkmode}) => {
   const [data, setData] = useState("")
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(null)
@@ -68,19 +68,26 @@ const Weather = ({apiSearch}) => {
     return logo  
   }
 
+
   //change Background
+  useEffect(() => {
+    const changeBackground =  darkMode ? `url(${require('../Assets/MoonSky.jpg')})` : `url(${require('../Assets/Sunrise.jpg')})`;
+    document.body.style.backgroundImage = changeBackground;
+  },[darkMode])
+
+
 
   return (
     <div>
       {data && (
         <>
-          <div className="flex justify-center items-center mt-10">
-            <h1 className="location font-bold text-5xl font-[Firasans] text-white">
+          <div className=" flex justify-center items-center mt-10">
+            <h1 className={`location font-bold text-5xl font-[Firasans] transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'}`}>
               {data.name}
             </h1>
           </div>
           <div className='flex max-sm:flex-col h-56 lg:flex-row md:justify-around my-12'>
-           <div className="flex md:w-1/3 md:h-72 max-sm:h-60 max-sm:m-auto max-sm:mb-8 max-sm:w-[360px] max-sm:px-2 items-center border rounded-lg bg-sky-200/50 border-none">
+           <div className="flex md:w-1/3 md:h-72 max-sm:h-60 max-sm:m-auto max-sm:mb-8 max-sm:w-[360px] max-sm:px-2 items-center border rounded-lg bg-cyan-800/50 border-none">
             <div className="flex flex-row w-96 h-60 items-center justify-evenly m-auto">
               <div className="Icon flex flex-col items-center max-sm:mb-8 w-1/2 max-sm:w-36 max-sm:mt-6 max-sm:h-56 h-56 p-2">
                 <img src={handleLogo()} 
@@ -89,39 +96,39 @@ const Weather = ({apiSearch}) => {
                   className='max-sm:w-28'
                 />
                 {data.main ? (
-                  <h2 className="Stats mt-4 text-3xl max-sm:text-md max-sm:mt-10 font-bold font-[Lexend] text-white">{data.weather[0].main}</h2>
+                  <h2 className={`transition-all duration-1000 ease-in-out transform Stats mt-4 text-3xl max-sm:text-md max-sm:mt-10 font-bold font-[Lexend] ${darkMode ? "text-white" : 'text-orange-400'}`}>{data.weather[0].main}</h2>
                 ) : null}
               </div>
               <div className="h-60 flex flex-col max-sm:mb-4 justify-center w-1/2 max-sm:w-36 mt-8">
                 {data.main ? (
-                  <h2 className="Temperature font-bold text-white max-sm:text-6xl text-7xl">
+                  <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-6xl text-7xl`}>
                     {MainTemp}℃
                   </h2>
                 ) : null}
                 <div className="flex flex-col justify-center mt-2">
                 {data.main ? (
-                  <h2 className="Temperature font-bold text-white max-sm:text-md">
+                  <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-md`}>
                     Feels like {FeelsLike}℃
                   </h2>
                 ) : null}
                   {data.main ? (
-                    <h2 className="Temperature font-bold text-white max-sm:text-md">
+                    <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-md`}>
                       Humidity {data.main.humidity.toFixed()}%
                     </h2>
                   ) : null}
                   {data.main ? (
-                    <h2 className="Temperature font-bold text-white max-sm:text-md">
+                    <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-md`}>
                      Wind Speed {data.wind.speed.toFixed()} m/s
                     </h2>
                   ) : null}
-                <div className="flex flex-row mt-2 justify-around border-t-2 border-white items-center">
+                <div className={`flex flex-row mt-2 justify-around border-t-2 transition-all duration-1000 ease-in-out transform ${darkMode ? "border-white" : 'border-orange-400'} items-center`}>
                   {data.main ? (
-                    <h2 className="Temperature font-bold max-sm:ml-4 mt-1 text-white max-sm:text-md">
+                    <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold max-sm:ml-4 mt-1 ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-md`}>
                       High {HighTemp}℃
                     </h2>
                   ) : null}
                   {data.main ? (
-                    <h2 className="Temperature font-bold mt-1 max-sm:ml-4 text-white max-sm:text-md">
+                    <h2 className={`transition-all duration-1000 ease-in-out transform Temperature font-bold mt-1 max-sm:ml-4 ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-md`}>
                       Low {LowTemp}℃
                     </h2>
                   ) : null}
@@ -131,7 +138,7 @@ const Weather = ({apiSearch}) => {
           </div>
           </div>
           <div>
-              <Apiforecast weatherId={weatherForecast}/>
+              <Apiforecast weatherId={weatherForecast} darkMode={darkMode}/>
           </div>
           </div>
         </>

@@ -9,7 +9,7 @@ import sun from '../../Assets/sunny.png'
 
 
 
-const Apiforecast = ({weatherId}, dailyForecast) => {
+const Apiforecast = ({weatherId, darkMode}, dailyForecast) => {
     const [dataApi, setDataApi] = useState('')
     const [error, setError] = useState(true)
     const [loading, setLoading] = useState(null)
@@ -82,7 +82,7 @@ useEffect(() => {
     return(
         <div className="flex"> 
             {dataApi && (
-                <div className="bg-sky-200/50 w-[800px] rounded-xl h-72 max-sm:h-64 flex flex-row max-sm:flex-col max-sm:overflow-y-auto max-sm:mb-4 max-sm:w-[360px] max-sm:m-auto justify-around">
+                <div className="bg-cyan-800/50 w-[800px] rounded-xl h-72 max-sm:h-64 flex flex-row max-sm:flex-col max-sm:overflow-y-auto max-sm:mb-4 max-sm:w-[360px] max-sm:m-auto justify-around">
                             {dailyForecast.map((items, index) => {        
                             const weatherIcons = (weather) => {
                             const condition = items.weather[0].main
@@ -101,18 +101,18 @@ useEffect(() => {
                             return(
                                 <div className="flex flex-col max-sm:flex-row md items-center mt-2"> 
                                 { /**  untuk menampilkan hasil dari mapping sebuah hari */}
-                                <h2 className="text-white font-bold text-lg max-sm:text-xs">            {mappingSchedule[index]}</h2>
-                                <h2 className="text-white text-xs max-sm:text-[8px]">{dates[index]}</h2>
+                                <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} font-bold text-lg max-sm:text-xs`}>{mappingSchedule[index]}</h2>
+                                <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} text-xs max-sm:text-[8px]`}>{dates[index]}</h2>
                                 <img 
                                     src={weatherIcons()}
                                     height={50}
                                     width={50}
                                     className="mt-2 max-sm:w-10"
                                     />
-                                <h2 className="text-white mt-2 max-sm:text-xs text-sm">{MainTemp}℃</h2>
+                                <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} text-white mt-2 max-sm:text-xs text-sm`}>{MainTemp}℃</h2>
                                 <div className="mt-20 flex max-sm:mt-24 flex-col items-center">
-                                    <h2 className="text-white max-sm:text-xs text-sm">{feelsLike}℃</h2>
-                                    <h2 className="mt-2 text-white max-sm:text-xs text-sm">{items.wind.speed} m/s</h2>
+                                    <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-xs text-sm`}>{feelsLike}℃</h2>
+                                    <h2 className={`mt-2 transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-xs text-sm`}>{items.wind.speed} m/s</h2>
                                 </div>                    
                             </div>
                         )
