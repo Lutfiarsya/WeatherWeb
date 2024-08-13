@@ -109,7 +109,7 @@ useEffect(() => {
                                     width={50}
                                     className="mt-2 max-sm:w-10"
                                     />
-                                <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} text-white mt-2 max-sm:text-xs text-sm`}>{MainTemp}℃</h2>
+                                <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} mt-2 max-sm:text-xs text-sm`}>{MainTemp}℃</h2>
                                 <div className="mt-20 flex max-sm:mt-24 flex-col items-center">
                                     <h2 className={`transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-xs text-sm`}>{feelsLike}℃</h2>
                                     <h2 className={`mt-2 transition-all duration-1000 ease-in-out transform ${darkMode ? "text-white" : 'text-orange-400'} max-sm:text-xs text-sm`}>{items.wind.speed} m/s</h2>
