@@ -82,7 +82,7 @@ useEffect(() => {
     return(
         <div className="flex"> 
             {dataApi && (
-                <div className={`${darkMode ? "bg-zinc-500/50" : 'bg-cyan-800/50'} w-[800px] rounded-xl h-72 max-sm:h-64 flex flex-row max-sm:flex-col max-sm:overflow-y-auto max-sm:mb-4 max-sm:w-[360px] max-sm:m-auto justify-around`}>
+                <div className={`transition-all duration-500 ease-in-out transform ${darkMode ? "bg-zinc-500/50" : 'bg-cyan-800/50'} w-[800px] rounded-xl h-72 max-sm:h-64 flex flex-row max-sm:flex-col max-sm:overflow-y-auto max-sm:mb-4 max-sm:w-[360px] max-sm:m-auto justify-around`}>
                             {dailyForecast.map((items, index) => {        
                             const weatherIcons = (weather) => {
                             const condition = items.weather[0].main

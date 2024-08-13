@@ -30,7 +30,7 @@ const handleClick = () => {
             />
             </button>
             {/* Button Darkmode */}
-            <div className={` transition-all duration-1000 ease-in-out transform ${ubah ? 'bg-zinc-900 text-white' : 'bg-white text-zinc-900' } w-10 h-10 flex item-center justify-center mt-1 rounded-3xl`} id="darkModeButton">
+            <div className={`max-sm:mt-0 max-sm:mr-3 transition-all duration-1000 ease-in-out transform ${ubah ? 'bg-zinc-900 text-white' : 'bg-white text-zinc-900' } w-10 h-10 flex item-center justify-center mt-1 rounded-3xl`} id="darkModeButton">
             <button onClick={() => handleClick()}> 
                 {ubah ? <Sun size={20}/> : <Moon size={20}/>}
             </button>
